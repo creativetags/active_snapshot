@@ -13,7 +13,6 @@ module ActiveSnapshot
       snapshot = snapshots.create!({
         event: event,
         user_id: (user.id if user),
-        metadata: (metadata || {}),
       })
 
       snapshot_items = []
