@@ -4,7 +4,7 @@ class <%= migration_name %> < ActiveRecord::Migration::Current
     create_table :snapshots<%= table_options %> do |t|
       t.belongs_to :item, polymorphic: true, null: false, index: true
       t.string :event, null: false
-      t.belongs_to :user, polymorphic: true
+      t.belongs_to :user, index: true
       t.<%= ActiveSnapshot.config.storage_method == 'native_json' ? 'json' : 'text' %> :metadata
       t.datetime :created_at, null: false
     end

@@ -3,10 +3,10 @@ module ActiveSnapshot
     self.table_name = "snapshots"
 
     if defined?(ProtectedAttributes)
-      attr_accessible :item_id, :item_type, :event, :user_id, :user_type
+      attr_accessible :item_id, :item_type, :event, :user_id
     end
 
-    belongs_to :user, polymorphic: true, optional: true
+    belongs_to :user, optional: true
     belongs_to :item, polymorphic: true
     has_many :snapshot_items, class_name: 'ActiveSnapshot::SnapshotItem', dependent: :destroy
 

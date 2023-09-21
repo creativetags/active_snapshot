@@ -4,7 +4,7 @@ class CreateSnapshotsTables < ActiveRecord::Migration::Current
     create_table :snapshots do |t|
       t.belongs_to :item, polymorphic: true, null: false, index: true
       t.string :event, null: false
-      t.belongs_to :user, polymorphic: true
+      t.belongs_to :user, index: true
 
       if ActiveSnapshot.config.storage_method_native_json?
         t.json :metadata
