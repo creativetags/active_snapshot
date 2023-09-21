@@ -3,7 +3,7 @@ class CreateSnapshotsTables < ActiveRecord::Migration::Current
   def change
     create_table :snapshots do |t|
       t.belongs_to :item, polymorphic: true, null: false, index: true
-      t.string :identifier, unique: true, index: true
+      t.string :event, null: false
       t.belongs_to :user, polymorphic: true
 
       if ActiveSnapshot.config.storage_method_native_json?

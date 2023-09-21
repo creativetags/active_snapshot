@@ -3,7 +3,7 @@ module ActiveSnapshot
     self.table_name = "snapshots"
 
     if defined?(ProtectedAttributes)
-      attr_accessible :item_id, :item_type, :identifier, :user_id, :user_type
+      attr_accessible :item_id, :item_type, :event, :user_id, :user_type
     end
 
     belongs_to :user, polymorphic: true, optional: true
@@ -12,8 +12,7 @@ module ActiveSnapshot
 
     validates :item_id, presence: true
     validates :item_type, presence: true
-    validates :identifier, uniqueness: { scope: [:item_id, :item_type], allow_nil: true}
-    validates :user_type, presence: true, if: :user_id
+    validates :event, presence: true
 
     def metadata
       return @metadata if @metadata
