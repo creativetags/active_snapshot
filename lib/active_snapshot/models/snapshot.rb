@@ -14,36 +14,6 @@ module ActiveSnapshot
     validates :item_type, presence: true
     validates :event, presence: true
 
-    def metadata
-      return @metadata if @metadata
-
-      if ActiveSnapshot.config.storage_method_json?
-        @metadata = JSON.parse(self[:metadata])
-      elsif ActiveSnapshot.config.storage_method_yaml?
-        yaml_method = "unsafe_load"
-
-        if !YAML.respond_to?("unsafe_load")
-          yaml_method = "load"
-        end
-
-        @metadata = YAML.send(yaml_method, self[:metadata])
-      elsif ActiveSnapshot.config.storage_method_native_json?
-        @metadata = self[:metadata]
-      end
-    end
-
-    def metadata=(h)
-      @metadata = nil
-
-      if ActiveSnapshot.config.storage_method_json?
-        self[:metadata] = h.to_json
-      elsif ActiveSnapshot.config.storage_method_yaml?
-        self[:metadata] = YAML.dump(h)
-      elsif ActiveSnapshot.config.storage_method_native_json?
-        self[:metadata] = h
-      end
-    end
-
     def build_snapshot_item(instance, child_group_name: nil)
       self.snapshot_items.new({
         object: instance.attributes,

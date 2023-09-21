@@ -6,12 +6,6 @@ class CreateSnapshotsTables < ActiveRecord::Migration::Current
       t.string :event, null: false
       t.belongs_to :user, index: true
 
-      if ActiveSnapshot.config.storage_method_native_json?
-        t.json :metadata
-      else
-        t.text :metadata
-      end
-
       t.datetime :created_at, null: false
     end
 

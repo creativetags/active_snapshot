@@ -8,7 +8,7 @@ module ActiveSnapshot
       has_many :snapshot_items, as: :item, class_name: 'ActiveSnapshot::SnapshotItem'
     end
 
-    def create_snapshot!(event: nil, user: nil, metadata: nil)
+    def create_snapshot!(event: nil, user: nil)
 
       snapshot = snapshots.create!({
         event: event,
